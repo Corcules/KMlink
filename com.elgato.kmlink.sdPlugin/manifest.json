@@ -1,0 +1,38 @@
+{
+  "Actions": [
+    {
+      "Icon": "kmlink",
+      "Name": "KM Link",
+      "States": [
+        {
+          "Image": "kmlink",
+          "FontSize": "18",
+          "FontStyle": "Bold",
+          "TitleAlignment": "middle",
+          "TitleColor": "#ffffff"
+        }
+      ],
+      "Tooltip": "Execute a Keyboard Maestro Macro",
+      "UUID": "com.corcules.keyboardmaestro.run"
+    }
+  ],
+  "SDKVersion": 2,
+  "Author": "Corcules",
+  "CodePath": "KMLink",
+  "PropertyInspectorPath": "pi.html",
+  "Description": "Execute a Keyboard Maestro Macro",
+  "Name": "KMLink",
+  "Icon": "kmlink",
+  "URL": "https://www.corcules.com",
+  "Version": "1.2",
+  "OS": [
+    {
+        "Platform": "mac",
+        "MinimumVersion" : "10.11"
+    }
+  ],
+  "Software":
+    {
+        "MinimumVersion" : "4.1"
+    }
+}
