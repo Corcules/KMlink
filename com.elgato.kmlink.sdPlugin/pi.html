@@ -98,12 +98,14 @@
             }
             
             websocket.onmessage = function( evt ) {
+                
                 var jsonObj = JSON.parse(evt.data);
+
                 var event = jsonObj['event'];
                 
                 if (jsonObj.event === 'sendToPropertyInspector') {
-                    if ( jsonObj.payload.hasOwnProperty( 'list' ) ) {
-                        makeSelectMacroList( JSON.parse(jsonObj.payload.list) );
+                    if ( jsonObj.payload.hasOwnProperty( 'groups' ) ) {
+                        makeSelectMacroList( jsonObj.payload.groups );
                     }
                 }
             }
@@ -129,9 +131,9 @@
         }
         
         
-        function makeSelectMacroList( objList ) {
+        function makeSelectMacroList( groups ) {
 
-            var groups = objList.groups ;
+            //var groups = objList.groups ;
             var select = document.getElementById('kmuid');
 
             select.innerHTML = "" ;
