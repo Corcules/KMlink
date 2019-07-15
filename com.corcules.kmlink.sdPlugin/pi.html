@@ -19,20 +19,39 @@
         }
         
         #loading-container .spinner {
-            display: none;
+            /*display: none;*/
+            display: inline-block; 
+            vertical-align: middle;
+            
+            background:none;
+            background-image: url(reload.svg);
+            background-repeat : no-repeat;
+            background-position: center center;
+            background-size: contain;
+            width: 10px;
+            height: 10px;
+        }
+
+        #loading-container .spinner svg path {
+            fill:#ffffff;
         }
         
         #loading-container.loading .spinner {
-            display: inline-block; 
-            vertical-align: middle;
-            margin-left:20px;
-            border: 2px solid #f3f3f3; /* Light grey */
-            border-top: 2px solid transparent; /* Blue */
-            border-radius: 50%;
-            width: 8px;
-            height: 8px;
+            
             animation: spin 700ms linear infinite;
         }
+        
+        #askForRefreshMacroList {
+            width: 25px;
+            flex-grow: 0;
+            border:0;
+            background: transparent;
+        }
+        
+        #kmuid {
+            margin-right: 0px;
+        }
+        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -55,18 +74,15 @@
             <div type="select" class="sdpi-item">
                 <div class="sdpi-item-label">Macro</div>
                 <select class="sdpi-item-value select" id="kmuid" style="width:100%;padding-right: 25px;"></select>
+                <button class="sdpi-item-value" id="askForRefreshMacroList" title="Refresh Macro list"><div class="spinner"></div></button>
             </div>
             
-            <div class="sdpi-item">
-                <div class="sdpi-item-label empty"></div>
-                <button class="sdpi-item-value" id="askForRefreshMacroList">Getting macro list <div class="spinner"></div></button>
-            </div>
             <div class="mask"></div>
         </div>
         
         <div class="sdpi-item">
             <div class="sdpi-item-label">Parameter</div>
-            <input class="sdpi-item-value" id="param" value="" placeholder="Parameter">
+            <input class="sdpi-item-value" id="param" value="" placeholder="Optionnal parameter">
         </div>
         
         
@@ -135,8 +151,15 @@
 
             //var groups = objList.groups ;
             var select = document.getElementById('kmuid');
+            
+            var currentlySelected = select.value;
 
             select.innerHTML = "" ;
+
+            var emptyMacro = document.createElement('option');
+            emptyMacro.value = "" ;
+            emptyMacro.innerHTML = "Select a macro";
+            select.appendChild(emptyMacro);
 
             for ( var g in groups ) {
 
@@ -154,14 +177,19 @@
                 
                 select.appendChild(group);
                 
-                var settings = actionInfo.payload.settings ;
-                if ( settings.hasOwnProperty('uid') ) {
-                    select.value = settings.uid ;
+                if ( currentlySelected != '' ) {
+                    select.value = currentlySelected ;
+                }else{
+                    var settings = actionInfo.payload.settings ;
+                    if ( settings.hasOwnProperty('uid') ) {
+                        select.value = settings.uid ;
+                    }
                 }
+                
             }
             
             document.getElementById('loading-container').classList.remove("loading");
-            document.getElementById('askForRefreshMacroList').innerHTML = 'Refresh macro list <div class="spinner"></div>';
+            //document.getElementById('askForRefreshMacroList').innerHTML = 'Refresh macro list <div class="spinner"></div>';
         }
         
         
@@ -193,7 +221,7 @@
         // button
         document.getElementById('askForRefreshMacroList').addEventListener('click', function() {
             document.getElementById('loading-container').className = 'loading' ;
-            document.getElementById('askForRefreshMacroList').innerHTML = 'Getting macro list <div class="spinner"></div>';
+            //document.getElementById('askForRefreshMacroList').innerHTML = 'Getting macro list <div class="spinner"></div>';
             askForRefreshMacroList();
         });     
         
