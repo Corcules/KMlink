@@ -11,7 +11,7 @@ Then select a macro in the list to execute it via Streamdeck action.
 ## Installation
 Download the plugin : [here](https://github.com/Corcules/KMlink/releases/latest)
 
-Open(double click ;-) )com.corcules.kmlink.streamDeckPlugin file.
+Open(double click ;-) ) com.corcules.kmlink.streamDeckPlugin file.
 
 ## Requirements
 
